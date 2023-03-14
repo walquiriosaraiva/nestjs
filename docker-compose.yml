@@ -1,12 +1,31 @@
 version: '3.8'
 
+networks:
+  nestjs:
+
 services:
-  backend:
+  build:
     build:
-      dockerfile: Dockerfile
       context: .
-    container_name: backend
+      dockerfile: local.dockerfile
+    container_name: build
+    volumes:
+      - ./:/home/node/app
+    entrypoint: ['npm', 'install']
+    networks:
+      - nestjs
+
+  nestjs-start:
+    build:
+      context: .
+      dockerfile: local.dockerfile
+    container_name: backend-nestjs
     ports:
       - 3000:3000
     volumes:
-      - ./:/usr/src
+      - ./:/home/node/app
+    depends_on:
+      - build
+    command: npm run start:dev
+    networks:
+      - nestjs

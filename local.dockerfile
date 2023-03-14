@@ -8,14 +8,14 @@ WORKDIR /home/node/app
 
 USER node
 
-RUN mkdir tmp
+#RUN mkdir tmp
 
-COPY --chown=node:node ./package*.json ./
+#COPY --chown=node:node ./package*.json ./
 
-RUN mkdir -p /home/node/app/node_modules
+#RUN mkdir -p /home/node/app/node_modules
 
-RUN npm install
+#RUN npm install
 
 COPY --chown=node:node . .
 
-ENTRYPOINT ["npm", "run", "start"]
+#ENTRYPOINT ["npm", "run", "start"]
