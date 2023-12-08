@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:21.3-alpine
 
 RUN npm config set strict-ssl=false
 
